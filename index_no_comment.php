@@ -2,7 +2,7 @@
 /***********************
 	Nikházy Ákos
 
-index_no_content.php
+index_no_comment.php
 
 The idea is keeping PHP clean from HTML and text.
 ***********************/
