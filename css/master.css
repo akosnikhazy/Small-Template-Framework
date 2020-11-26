@@ -1,0 +1,16 @@
+body,html{margin:0;padding:0;}
+
+html{
+	
+	background:#efefef
+
+}
+
+h1{
+	text-align:center;
+	
+}
+div{
+	width: 1000px;
+	margin: 0 auto;
+}
