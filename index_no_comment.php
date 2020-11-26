@@ -23,7 +23,7 @@ for($i = 1; $i<=10; $i++)
 {
 	
 	$listLineTemplate -> tagList['item'] = $text->PrintText('listItemText') . $i;
-	$list .= $listLineTemplate->Templating();
+	$list .= $listLineTemplate -> Templating(true,false);
 	
 }
 		
