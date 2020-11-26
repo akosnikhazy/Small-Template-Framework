@@ -2,8 +2,7 @@
 /***********************
 	Nikházy Ákos
 
-Text.class.php szövegek betöltése
-
+Text.class.php loadin text from .json 
 ***********************/
 
 class Text{
