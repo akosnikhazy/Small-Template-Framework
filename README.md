@@ -9,7 +9,7 @@ You can create template files in the templates/html folder following
 the rules you see in the provided ones.
 
 # Make it secure
-In the cache, class, require, textt folder put a .htaccess file with 
+In the cache, class, require, text folder put a .htaccess file with 
 deny from all This is extremely important at the cache folder, as it 
 contains pure HTML of every page cached. If you want to cache for 
 example user profile page that is private: you do not want anyone in 
