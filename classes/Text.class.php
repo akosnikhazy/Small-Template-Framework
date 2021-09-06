@@ -20,6 +20,12 @@ class Text{
 		
 	}
 	
+	public function getTextArray()
+	{
+		return $this->textFile;
+	}
+	
+	
 	public function PrintText($id)
 	{
 		
