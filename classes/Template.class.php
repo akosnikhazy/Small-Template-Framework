@@ -9,7 +9,12 @@ $template = new Template('templateName'); // template name is the file name of t
 
 $template -> tagList['tag1name'] = 'tag 1 content';
 $template -> tagList['tag2name'] = 'tag 2 content';
-$template -> tagList['tag3name'] = NULL; // if its NULL it loads a HTML file content itself. In this case: tag3name.html
+$template -> tagList['tag3name'] = NULL; // if its NULL it loads a HTML file content itself. In this case: tag3name.html 
+					 // it comes handy when you have simple repeating HTML tags you want put in your result.
+					 
+					 // Be aware: if you use data from database, you can end up with NULL as value. You should
+					 // always check for that case if a tag is expected to have real content. You can do this:
+					 //  $template -> tagList['content'] = ($data === NULL)? 'no data' : $data;
 
 echo $template -> Templating(); // this returns the finished templated file content
 $template -> templateozas(false); // this collects the finished templated content in the finishedTemplate property
@@ -66,10 +71,10 @@ class Template{
 		$this -> FromWhatToWhat();
 		
 		$this -> finishedTemplate = str_replace(
-												$this -> fromWhat, 
-											    $this -> toWhat, 
-												$this -> templateFile
-												);
+							$this -> fromWhat, 
+							$this -> toWhat, 
+							$this -> templateFile
+							);
 												 
 		if($return) return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
 									  :$this -> finishedTemplate;
@@ -86,8 +91,8 @@ class Template{
 		foreach($this -> tagList as $tag => $content)
 		{
 			
-			$this -> fromWhat[]		= $this -> tagOpen . $tag . $this -> tagClose;
-			$this -> toWhat[] 		= $content;
+			$this -> fromWhat[]	= $this -> tagOpen . $tag . $this -> tagClose;
+			$this -> toWhat[] 	= $content;
 			
 			if($content === NULL) // rare case
 				$this -> toWhat[count($this -> toWhat)-1] = file_get_contents($this -> templateFolder . '/' . $tag . '.html');
@@ -99,7 +104,6 @@ class Template{
 	private function oneLiner($in)
 	{
 		return preg_replace('/^\s+|\n|\r|\t|\s+$/m', '', $in);
-		
 	}
 	
 }
