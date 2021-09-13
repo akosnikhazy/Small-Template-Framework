@@ -30,30 +30,30 @@ templateName.html
 
 class Template{
 	
-	private $fileName 				= '';
-	private $templateFile			= '';
-	private $fromWhat				= Array();
-	private $toWhat					= Array();
+	private $fileName 		= '';
+	private $templateFile		= '';
+	private $fromWhat		= Array();
+	private $toWhat			= Array();
 	
 	// you collect content in this like this: $object -> tagList['tagName'] = 'stg';
-	public $tagList 				= Array();
+	public $tagList 		= Array();
 	
 	// you can customize the folder. For example I had a case where I had XML templates too so I made a templates/XML folder too
-	public $templateFolder			= 'templates/html';
+	public $templateFolder		= 'templates/html';
 		
 	// you can customize your tags now its {{tagname}}
-	public $tagOpen					= '{{';
-	public $tagClose				= '}}';
+	public $tagOpen			= '{{';
+	public $tagClose		= '}}';
 	
 	// you can access the templated content
-	public $finishedTemplate		= '';
+	public $finishedTemplate	= '';
 	
 
 	
 	function __construct($_fileName) 
 	{
 	
-		$this -> fileName 		= $_fileName;
+		$this -> fileName 	= $_fileName;
 
 		$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.html');
 		
