@@ -16,8 +16,9 @@ $template -> tagList['tag3name'] = NULL; // if its NULL it loads a HTML file con
 					 // always check for that case if a tag is expected to have real content. You can do this:
 					 //  $template -> tagList['content'] = ($data === NULL)? 'no data' : $data;
 
-echo $template -> Templating(); // this returns the finished templated file content
-$template -> templateozas(false); // this collects the finished templated content in the finishedTemplate property
+echo $template -> Templating();       // this returns the finished templated file content (returning and one liner code is true by default)
+$template -> Templatin(false);        // this collects the finished templated content in the finishedTemplate property
+$template -> Templatin(false,false);  // this collects the finished templated content in the finishedTemplate property AND it doesn't force the HTML in one line
 
 Example template file:
 
