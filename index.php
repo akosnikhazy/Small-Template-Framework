@@ -37,9 +37,9 @@ $cache				= new Cache(10); // keep cahe for X seconds
 // {{something}} with value by using the tagList[] property
 // $template -> tagList['something'] = value property
 // ****************
-$template			= new Template('index'); 	// this will template the index.html file in the templates folder
+$template		= new Template('index'); 	// this will template the index.html file in the templates folder
 $listLineTemplate 	= new Template('listItem'); // this will template the listItem.html file in the templates folder
-$rawTextTemplate	= new Template(NULL,' {{texthere}} at rendering'); // This will template that string. The file must be NULL
+$rawTextTemplate	= new Template('',' {{texthere}} at rendering'); // This will template that string. The file must be NULL
 // ****************
 // ini text class
 // 
