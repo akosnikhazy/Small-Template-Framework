@@ -5,7 +5,7 @@
 Template.class.php
 
 Usage:
-$template = new Template('templateName'); // template name is the file name of the html file in the templates folder
+$template = new Template('templateName','a string with {{replacable stuff}} in it'); // template name is the file name of the html file in the templates folder
 
 $template -> tagList['tag1name'] = 'tag 1 content';
 $template -> tagList['tag2name'] = 'tag 2 content';
@@ -17,8 +17,8 @@ $template -> tagList['tag3name'] = NULL; // if its NULL it loads a HTML file con
 					 //  $template -> tagList['content'] = ($data === NULL)? 'no data' : $data;
 
 echo $template -> Templating();       // this returns the finished templated file content (returning and one liner code is true by default)
-$template -> Templatin(false);        // this collects the finished templated content in the finishedTemplate property
-$template -> Templatin(false,false);  // this collects the finished templated content in the finishedTemplate property AND it doesn't force the HTML in one line
+$template -> Templating(false);        // this collects the finished templated content in the finishedTemplate property
+$template -> Templating(false,false);  // this collects the finished templated content in the finishedTemplate property AND it doesn't force the HTML in one line
 
 Example template file:
 
@@ -32,7 +32,8 @@ templateName.html
 class Template{
 	
 	private $fileName 		= '';
-	private $templateFile		= '';
+	private $rawString 		= '';
+	private $templateFile	= NULL;
 	private $fromWhat		= Array();
 	private $toWhat			= Array();
 	
@@ -48,15 +49,17 @@ class Template{
 	
 	// you can access the templated content
 	public $finishedTemplate	= '';
+	public $finishedString		= '';
 	
 
 	
-	function __construct($_fileName) 
+	function __construct($_fileName,$_rawString = NULL) 
 	{
 	
-		$this -> fileName 	= $_fileName;
-
-		$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.html');
+		$this -> fileName 		= $_fileName;
+		$this -> rawString  	= $_rawString;
+		if($_fileName !== NULL) // this happens when you use raw sting mode istead
+			$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.html');
 		
 	}
 	
@@ -69,23 +72,6 @@ class Template{
 		// $oneLiner: if false it returns the HTML as is. 
 		// ****************
 		
-		$this -> FromWhatToWhat();
-		
-		$this -> finishedTemplate = str_replace(
-							$this -> fromWhat, 
-							$this -> toWhat, 
-							$this -> templateFile
-							);
-												 
-		if($return) return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
-									  :$this -> finishedTemplate;
-		
-	}
-	
-
-	private function FromWhatToWhat()
-	{
-
 		$this -> fromWhat	= Array();
 		$this -> toWhat		= Array();
 			
@@ -100,10 +86,39 @@ class Template{
 			
 		}
 		
+		if($this -> templateFile)
+		{
+			$this -> finishedTemplate = str_replace(
+								$this -> fromWhat, 
+								$this -> toWhat, 
+								$this -> templateFile
+								);
+		}
+		
+		if($this -> rawString != NULL)
+		{
+			$this -> finishedString = str_replace(
+							$this -> fromWhat, 
+							$this -> toWhat, 
+							$this -> rawString
+							);
+			
+		}
+		
+		if($return){ 
+			if($this -> rawString === NULL)
+					return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
+									  :$this -> finishedTemplate;
+			
+			return ($oneLiner)?$this -> oneLiner($this -> finishedString)
+							  :$this -> finishedString;
+		}
+		
 	}
 	
-	private function oneLiner($in)
-	{
+	
+	public function oneLiner($in)
+	{// made it public, you might want to use it elsewhere
 		return preg_replace('/^\s+|\n|\r|\t|\s+$/m', '', $in);
 	}
 	
