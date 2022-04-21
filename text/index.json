@@ -1,4 +1,5 @@
 {
 	"listItemText":"list item - ",
-	"someText":"This is some text"
+	"someText":"This is some text",
+	"complete":"completed"
 }
