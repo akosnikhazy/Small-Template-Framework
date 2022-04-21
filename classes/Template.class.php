@@ -56,7 +56,7 @@ class Template{
 	
 
 	
-	function __construct($_fileName,$_rawString = NULL) 
+	function __construct($_fileName,$_rawString = '') 
 	{
 		// ****************
 		// $_fileName: template file's name without extension. Setup extension with $templateFileExtension
@@ -67,7 +67,7 @@ class Template{
 		
 		$this -> fileName 		= $_fileName;
 		$this -> rawString  	= $_rawString;
-		if($_fileName !== NULL) // this happens when you use raw sting mode instead
+		if($_fileName !== '') // this happens when you use raw sting mode instead
 			$this -> templateFile	= $this -> getTemplateFile($_fileName);
 		
 	}
@@ -100,19 +100,15 @@ class Template{
 			}
 		}
 		
+		$this -> finishedTemplate = str_replace($this -> fromWhat,$this -> toWhat,$this -> templateFile);
+		$this -> finishedString   = str_replace($this -> fromWhat,$this -> toWhat,$this -> rawString);
+		
 		if($return)
 		{ 
-			if($this -> rawString === NULL)
-			{
-				
-				$this -> finishedTemplate = str_replace($this -> fromWhat,$this -> toWhat,$this -> templateFile);
-				
+			if($this -> rawString === '')
 				return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
 								  :$this -> finishedTemplate;
-			}
-			
-			$this -> finishedString   = str_replace($this -> fromWhat,$this -> toWhat,$this -> rawString);
-			
+		
 			return ($oneLiner)?$this -> oneLiner($this -> finishedString)
 							  :$this -> finishedString;
 		}
