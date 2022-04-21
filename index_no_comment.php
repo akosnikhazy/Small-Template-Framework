@@ -15,6 +15,8 @@ $cache				= new Cache(10);
 $template			= new Template('index');
 $listLineTemplate 	= new Template('listItem');
 
+$rawTextTemplate	= new Template(NULL,' {{texthere}} at rendering');
+
 $text				= new Text('index');
 
 $list = '';
@@ -35,5 +37,8 @@ $template -> tagList['content']  = 'This is the content. You should use the Text
 $template -> tagList['aList'] = $list;
 
 $template -> tagList['otherHTML'] = NULL;
+
+$rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complate');
+$template -> tagList['rawStringExample'] = $rawTextTemplate -> Templating();
 
 $cache -> cache($template -> Templating());
