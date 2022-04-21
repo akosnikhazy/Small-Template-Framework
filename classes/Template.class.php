@@ -59,7 +59,7 @@ class Template{
 	function __construct($_fileName,$_rawString = NULL) 
 	{
 		// ****************
-		// $$_fileName: template file's name without extension. Setup extension with $templateFileExtension
+		// $_fileName: template file's name without extension. Setup extension with $templateFileExtension
 		//   			use NULL when you want to use $_rawString
 		// 
 		// $_rawString: template a string instead of file. If its NULL it assumes file
