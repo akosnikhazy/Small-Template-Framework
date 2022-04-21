@@ -1,9 +1,7 @@
 <?php
 /***********************
 	Nikházy Ákos
-
 index.php
-
 The idea is keeping PHP clean from HTML and text.
 This small framework does just that. It is pretty
 good for small sites.
@@ -39,9 +37,9 @@ $cache				= new Cache(10); // keep cahe for X seconds
 // {{something}} with value by using the tagList[] property
 // $template -> tagList['something'] = value property
 // ****************
-$template			= new Template('index');
-$listLineTemplate 	= new Template('listItem');
-
+$template			= new Template('index'); 	// this will template the index.html file in the templates folder
+$listLineTemplate 	= new Template('listItem'); // this will template the listItem.html file in the templates folder
+$rawTextTemplate	= new Template(NULL,' {{texthere}} at rendering'); // This will template that string. The file must be NULL
 // ****************
 // ini text class
 // 
@@ -91,6 +89,10 @@ $template -> tagList['content']  = 'This is the content. You should use the Text
 $template -> tagList['aList'] = $list;
 
 $template -> tagList['otherHTML'] = NULL; // this will replace the {{otherHTML}} tag to the otherHTML file's content
+
+// we templating string same way as files
+$rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complate');
+$template -> tagList['rawStringExample'] = $rawTextTemplate -> Templating();
 
 // ****************
 // Show filled template for user and putting it in a cache
