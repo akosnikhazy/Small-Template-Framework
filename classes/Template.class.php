@@ -33,7 +33,7 @@ class Template{
 	
 	private $fileName 		= '';
 	private $rawString 		= '';
-	private $templateFile	= NULL;
+	private $templateFile	        = NULL;
 	private $fromWhat		= Array();
 	private $toWhat			= Array();
 	
@@ -41,7 +41,7 @@ class Template{
 	public $tagList 		= Array();
 	
 	// you can customize the folder. For example I had a case where I had XML templates too so I made a templates/XML folder too
-	public $templateFolder		= 'templates/html';
+	public $templateFolder	= 'templates/html';
 	
 	// if you want something else than html
 	public $templateFileExtension = 'html';
@@ -91,13 +91,8 @@ class Template{
 			$this -> toWhat[] 	= $content;
 			
 			if($content === NULL) // rare case
-			{
-				$this -> toWhat[count($this -> toWhat)-1] = '';
-				
-				
 				$this -> toWhat[count($this -> toWhat)-1] = $this -> getTemplateFile($tag);
-				
-			}
+			
 		}
 		
 		$this -> finishedTemplate = str_replace($this -> fromWhat,$this -> toWhat,$this -> templateFile);
@@ -133,6 +128,5 @@ class Template{
 	{// made it public, you might want to use it elsewhere
 		return preg_replace('/^\s+|\n|\r|\t|\s+$/m', '', $in);
 	}
-	
 }
 ?>
