@@ -82,8 +82,14 @@ class Template{
 			$this -> toWhat[] 	= $content;
 			
 			if($content === NULL) // rare case
-				$this -> toWhat[count($this -> toWhat)-1] = file_get_contents($this -> templateFolder . '/' . $tag . '.html');
-			
+			{
+				$this -> toWhat[count($this -> toWhat)-1] = '';
+				
+				if(file_exists($this -> templateFolder . '/' . $tag . '.html'))
+				{
+					$this -> toWhat[count($this -> toWhat)-1] = file_get_contents($this -> templateFolder . '/' . $tag . '.html');
+				}
+			}
 		}
 		
 		if($return)
@@ -91,13 +97,13 @@ class Template{
 			if($this -> rawString === NULL)
 			{
 				
-				$this -> finishedTemplate = $this->replace($this -> templateFile);
+				$this -> finishedTemplate = str_replace($this -> fromWhat,$this -> toWhat,$this -> templateFile);
 				
 				return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
 								  :$this -> finishedTemplate;
 			}
 			
-			$this -> finishedString   = $this->replace($this -> rawString);
+			$this -> finishedString   = str_replace($this -> fromWhat,$this -> toWhat,$this -> rawString);
 			
 			return ($oneLiner)?$this -> oneLiner($this -> finishedString)
 							  :$this -> finishedString;
@@ -105,10 +111,6 @@ class Template{
 		
 	}
 	
-	private function replace($inWhat)
-	{
-		return	str_replace($this -> fromWhat,$this -> toWhat,$inWhat);
-	}
 	
 	public function oneLiner($in)
 	{// made it public, you might want to use it elsewhere
