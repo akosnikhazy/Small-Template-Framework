@@ -58,7 +58,7 @@ class Template{
 	
 		$this -> fileName 		= $_fileName;
 		$this -> rawString  	= $_rawString;
-		if($_fileName !== NULL) // this happens when you use raw sting mode istead
+		if($_fileName !== NULL) // this happens when you use raw sting mode instead
 			$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.html');
 		
 	}
