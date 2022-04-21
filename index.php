@@ -91,7 +91,7 @@ $template -> tagList['aList'] = $list;
 $template -> tagList['otherHTML'] = NULL; // this will replace the {{otherHTML}} tag to the otherHTML file's content
 
 // we templating string same way as files
-$rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complate');
+$rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complete');
 $template -> tagList['rawStringExample'] = $rawTextTemplate -> Templating();
 
 // ****************
