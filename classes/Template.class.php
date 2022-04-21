@@ -58,11 +58,17 @@ class Template{
 	
 	function __construct($_fileName,$_rawString = NULL) 
 	{
-	
+		// ****************
+		// $$_fileName: template file's name without extension. Setup extension with $templateFileExtension
+		//   			use NULL when you want to use $_rawString
+		// 
+		// $_rawString: template a string instead of file. If its NULL it assumes file
+		// ****************
+		
 		$this -> fileName 		= $_fileName;
 		$this -> rawString  	= $_rawString;
 		if($_fileName !== NULL) // this happens when you use raw sting mode instead
-			$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.' . $this -> templateFileExtension);
+			$this -> templateFile	= $this -> getTemplateFile($_fileName);
 		
 	}
 	
@@ -88,9 +94,9 @@ class Template{
 			{
 				$this -> toWhat[count($this -> toWhat)-1] = '';
 				
-				if(file_exists($this -> templateFolder . '/' . $tag . '.html'))
+				if(file_exists($this -> templateFolder . '/' . $tag . '.' . $this -> templateFileExtension))
 				{
-					$this -> toWhat[count($this -> toWhat)-1] = file_get_contents($this -> templateFolder . '/' . $tag . '.' . $this -> templateFileExtension);
+					$this -> toWhat[count($this -> toWhat)-1] = $this -> getTemplateFile($tag);
 				}
 			}
 		}
@@ -111,6 +117,13 @@ class Template{
 			return ($oneLiner)?$this -> oneLiner($this -> finishedString)
 							  :$this -> finishedString;
 		}
+		
+	}
+	
+	private function getTemplateFile($fileName)
+	{
+		
+		return file_get_contents($this -> templateFolder . '/' . $fileName . '.' . $this -> templateFileExtension);
 		
 	}
 	
