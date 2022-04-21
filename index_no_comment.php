@@ -38,7 +38,7 @@ $template -> tagList['aList'] = $list;
 
 $template -> tagList['otherHTML'] = NULL;
 
-$rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complate');
+$rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complete');
 $template -> tagList['rawStringExample'] = $rawTextTemplate -> Templating();
 
 $cache -> cache($template -> Templating());
