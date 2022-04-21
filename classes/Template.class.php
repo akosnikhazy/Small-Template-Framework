@@ -42,6 +42,9 @@ class Template{
 	
 	// you can customize the folder. For example I had a case where I had XML templates too so I made a templates/XML folder too
 	public $templateFolder		= 'templates/html';
+	
+	// if you want something else than html
+	public $templateFileExtension = 'html';
 		
 	// you can customize your tags now its {{tagname}}
 	public $tagOpen			= '{{';
@@ -59,7 +62,7 @@ class Template{
 		$this -> fileName 		= $_fileName;
 		$this -> rawString  	= $_rawString;
 		if($_fileName !== NULL) // this happens when you use raw sting mode instead
-			$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.html');
+			$this -> templateFile	= file_get_contents($this -> templateFolder . '/' . $_fileName . '.' . $this -> templateFileExtension);
 		
 	}
 	
@@ -87,7 +90,7 @@ class Template{
 				
 				if(file_exists($this -> templateFolder . '/' . $tag . '.html'))
 				{
-					$this -> toWhat[count($this -> toWhat)-1] = file_get_contents($this -> templateFolder . '/' . $tag . '.html');
+					$this -> toWhat[count($this -> toWhat)-1] = file_get_contents($this -> templateFolder . '/' . $tag . '.' . $this -> templateFileExtension);
 				}
 			}
 		}
@@ -110,7 +113,6 @@ class Template{
 		}
 		
 	}
-	
 	
 	public function oneLiner($in)
 	{// made it public, you might want to use it elsewhere
