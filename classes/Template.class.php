@@ -94,10 +94,9 @@ class Template{
 			{
 				$this -> toWhat[count($this -> toWhat)-1] = '';
 				
-				if(file_exists($this -> templateFolder . '/' . $tag . '.' . $this -> templateFileExtension))
-				{
-					$this -> toWhat[count($this -> toWhat)-1] = $this -> getTemplateFile($tag);
-				}
+				
+				$this -> toWhat[count($this -> toWhat)-1] = $this -> getTemplateFile($tag);
+				
 			}
 		}
 		
@@ -122,8 +121,15 @@ class Template{
 	
 	private function getTemplateFile($fileName)
 	{
+		// ****************
+		// $fileName: name of the file.
+		// ****************
+		
+		if(!file_exists($this -> templateFolder . '/' . $fileName . '.' . $this -> templateFileExtension))
+			return '';
 		
 		return file_get_contents($this -> templateFolder . '/' . $fileName . '.' . $this -> templateFileExtension);
+			
 		
 	}
 	
