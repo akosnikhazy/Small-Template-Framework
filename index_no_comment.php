@@ -10,14 +10,14 @@ The idea is keeping PHP clean from HTML and text.
 require 'require/head.php';
 
 
-$cache				= new Cache(10);
+$cache			= new Cache(10);
 									
-$template			= new Template('index');
+$template		= new Template('index');
 $listLineTemplate 	= new Template('listItem');
 
-$rawTextTemplate	= new Template(NULL,' {{texthere}} at rendering');
+$rawTextTemplate	= new Template('',' {{texthere}} at rendering');
 
-$text				= new Text('index');
+$text			= new Text('index');
 
 $list = '';
 
