@@ -86,29 +86,18 @@ class Template{
 			
 		}
 		
-		if($this -> templateFile)
-		{
-			$this -> finishedTemplate = str_replace(
-								$this -> fromWhat, 
-								$this -> toWhat, 
-								$this -> templateFile
-								);
-		}
-		
-		if($this -> rawString != NULL)
-		{
-			$this -> finishedString = str_replace(
-							$this -> fromWhat, 
-							$this -> toWhat, 
-							$this -> rawString
-							);
-			
-		}
-		
-		if($return){ 
+		if($return)
+		{ 
 			if($this -> rawString === NULL)
-					return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
-									  :$this -> finishedTemplate;
+			{
+				
+				$this -> finishedTemplate = $this->replace($this -> templateFile);
+				
+				return ($oneLiner)?$this -> oneLiner($this -> finishedTemplate)
+								  :$this -> finishedTemplate;
+			}
+			
+			$this -> finishedString   = $this->replace($this -> rawString);
 			
 			return ($oneLiner)?$this -> oneLiner($this -> finishedString)
 							  :$this -> finishedString;
@@ -116,6 +105,10 @@ class Template{
 		
 	}
 	
+	private function replace($inWhat)
+	{
+		return	str_replace($this -> fromWhat,$this -> toWhat,$inWhat);
+	}
 	
 	public function oneLiner($in)
 	{// made it public, you might want to use it elsewhere
