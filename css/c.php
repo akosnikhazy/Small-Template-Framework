@@ -1,6 +1,6 @@
 <?php
 	$expires = 60*60*24;
-	$cssFile = 'master.css';
+	$cssFile = 'main.css';
 	
 	header("Pragma: public");
 	header("Cache-Control: maxage=" . $expires);
