@@ -29,7 +29,11 @@ class Text{
 	public function PrintText($id)
 	{
 		
-		return $this->textFile[$id]; 
+		if(array_key_exists($id,$this->textFile))
+			return $this->textFile[$id];
+
+		return 'missing text';
+		
 		
 	}
 
