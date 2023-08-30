@@ -16,6 +16,10 @@ $template -> tagList['tag3name'] = NULL; // if its NULL it loads a HTML file con
 					 // always check for that case if a tag is expected to have real content. You can do this:
 					 //  $template -> tagList['content'] = ($data === NULL)? 'no data' : $data;
 
+$template -> tagList['tag4name'] = array('<span>something</span>','<span>other thing</span>'); // if it is an array it will implode it
+											       // it is handy when you have for example a table with rows
+		                                                                               // and you collect the row html in an array
+
 echo $template -> Templating();       // this returns the finished templated file content (returning and one liner code is true by default)
 $template -> Templating(false);        // this collects the finished templated content in the finishedTemplate property
 $template -> Templating(false,false);  // this collects the finished templated content in the finishedTemplate property AND it doesn't force the HTML in one line
@@ -86,6 +90,7 @@ class Template{
 			
 		foreach($this -> tagList as $tag => $content)
 		{
+			if(is_array($content)) $content = implode('',$content);
 			
 			$this -> fromWhat[]	= $this -> tagOpen . $tag . $this -> tagClose;
 			$this -> toWhat[] 	= $content;
