@@ -73,8 +73,28 @@ for($i = 1; $i<=10; $i++)
 	$list .= $listLineTemplate->Templating(true,false); 
 	
 }
-	
-	
+
+/* 
+	// a better way for list or even tables. Instead of connecting strings, you put them in an array
+        // the Templating method will implode it like this implode('',$array);
+	$list = array();
+	for($i = 1; $i<=10; $i++)
+	{
+		
+		// you can use smaller templates. This one keeps a simple <li>{{listItemText}}</li> HTML line
+		// also here we use the Text class, that loads text from a .json file by id, instead putting text
+		// in PHP code.
+		$listLineTemplate -> tagList['item'] = $text->PrintText('listItemText') . $i;
+		
+		// ****************
+		// We collect the list items as a string in a variable.
+		// This line returns the templated HTML string (first paramater is true), but do not work on
+		// one lineing it (second parameter is false) as at the end it will be one lined anyway.
+		// ****************
+		$list[] = $listLineTemplate->Templating(true,false); 
+		
+	}
+*/
 // ****************
 // Populate the template here
 // Examples:
