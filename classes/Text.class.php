@@ -2,13 +2,36 @@
 /***********************
 	Nikházy Ákos
 
-Text.class.php loadin text from .json 
+Text.class.php loading text from .json
+
+Text file looks like this:
+{
+	"textid1":"text",
+	"textid2":"text2,
+	"something":"A whole paragraph",
+	"formatedText":"This text will be formated you can add as many %s and %d and %e etc as you wish"
+
+}
+
+Usage:
+$text = new Text('yourtextfile.json');
+
+$text -> textFolder = 'example-text-folder'
+
+// print a simple text
+echo $text -> PrintText('textid2');
+
+// print a formated text
+echo $text -> PrintText('formatedText','string',3,3.3);
+
+
+
 ***********************/
 
 class Text{
 	
 
-	public  $textFolder		= 'text';
+	public  $textFolder	= 'text';
 	
 	private $textFile = '';
 	
@@ -26,12 +49,28 @@ class Text{
 	}
 	
 	
-	public function PrintText($id)
+	public function PrintText()
 	{
+		$nargs = func_num_args();
+		if($nargs < 1) throw new Exception('Missing args. At least one needed');
 		
-		if(array_key_exists($id,$this->textFile))
-			return $this->textFile[$id];
 
+		$id = func_get_arg(0);
+		
+		$otherArgs = array();
+
+		for($i = 1; $i < $nargs; $i++)
+		{
+
+			$otherArgs[] =  func_get_arg($i);
+
+		}
+
+		if(array_key_exists($id,$this->textFile))
+		{
+			return ($nargs == 1) ? $this->textFile[$id] : sprintf($this->textFile[$id],...$otherArgs);
+		}
+		// so it works even if we do not have text for that id
 		return 'missing text';
 		
 		
