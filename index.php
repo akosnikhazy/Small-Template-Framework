@@ -114,6 +114,8 @@ $template -> tagList['otherHTML'] = NULL; // this will replace the {{otherHTML}}
 $rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complete');
 $template -> tagList['rawStringExample'] = $rawTextTemplate -> Templating();
 
+$template -> tagList['formatedText'] = $text -> PrintText('formatedText','string',3,3.3);
+
 // ****************
 // Show filled template for user and putting it in a cache
 // we never reach this point if cache already exists.
