@@ -52,7 +52,6 @@ class Text{
 	public function PrintText()
 	{
 		$nargs = func_num_args();
-		
 		// no args => that is a real problem
 		if($nargs < 1) throw new Exception('Missing args. At least one needed');
 		
@@ -61,16 +60,15 @@ class Text{
 		// no such id? We just tell it to the user
 		if(!array_key_exists($id,$this->textFile)) return 'missing text';
 
-		$otherArgs = array();
-
-		for($i = 1; $i < $nargs; $i++)
+		if($nargs > 1)
 		{
-
-			$otherArgs[] = func_get_arg($i);
-
+			$otherArgs = func_get_args();
+			array_shift($otherArgs);
+			
+			return sprintf($this->textFile[$id],...$otherArgs);
 		}
 
-		return ($nargs == 1) ? $this->textFile[$id] : sprintf($this->textFile[$id],...$otherArgs);
+		return $this->textFile[$id];
 		
 	}
 
