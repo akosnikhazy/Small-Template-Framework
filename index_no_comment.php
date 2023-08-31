@@ -40,5 +40,6 @@ $template -> tagList['otherHTML'] = NULL;
 
 $rawTextTemplate -> tagList['texthere'] = $text -> PrintText('complete');
 $template -> tagList['rawStringExample'] = $rawTextTemplate -> Templating();
+$template -> tagList['formatedText'] = $text -> PrintText('formatedText','string',3,3.3);
 
 $cache -> cache($template -> Templating());
