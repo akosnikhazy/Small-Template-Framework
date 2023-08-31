@@ -72,5 +72,13 @@ class Text{
 		
 	}
 
+	public function GetText()
+	{ // "PrintText" was not a good name for it because it does not print text. It gets text.
+	  // I put this here so we have a method with proper naming and still keep everything backwards compatible.
+	
+		return $this -> PrintText(...func_get_args());
+
+	}
+
 }
 ?>
