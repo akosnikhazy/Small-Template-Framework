@@ -25,7 +25,7 @@ require 'require/head.php';
 // can do a Cache(0) to re-cache the content at that point. 
 // ****************
 
-$cache				= new Cache(10); // keep cahe for X seconds
+$cache				= new Cache(10); // keep cache for X seconds
 									 
 // $cache = new Cache(0); this effectively turns off caching for this page
 
